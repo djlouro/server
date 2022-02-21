@@ -10,6 +10,12 @@ const params = {
 function authChecker(req, res, next) {
     let idToken = null
     
+    
+    if (req.path == "/clients" && req.query.username != null) {
+        next();
+        return;
+    }
+
     for (const key in req.cookies) {
         if (key.includes("idToken")) {
             idToken = req.cookies[key]
